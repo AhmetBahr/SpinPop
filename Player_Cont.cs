@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class Player_Cont : MonoBehaviour
 {
@@ -13,33 +14,39 @@ public class Player_Cont : MonoBehaviour
     [SerializeField]
     float Counter = 0;
     [SerializeField]
-    private int yon = -1;
+    private int yon;
     [SerializeField]
     private float speed;
-
+    [SerializeField]
+    private float BgScore;
 
     //  0 = mavi
     //  1 = mor
     [SerializeField]
-    private int colorint = 0;
+    private int colorint;
 
     public Color[] colors;
 
     [SerializeField]
     private GameObject gameObject;
 
-
-
     public int WeScore;
     public TextMeshProUGUI textP;
     public bool isDeat = false;
 
+    public float level = 1;
+    public Button OnPlayButton;
+
+    MenuScript Referans_Kod1;
 
     public void Start()
     {
-        GetComponent<Renderer>().material.color = colors[0];
-        colorint = 0;
+        GetComponent<Renderer>().material.color = colors[1];
+        yon = 1;
         WeScore = 0;
+        colorint = 1;
+        Referans_Kod1 = GameObject.Find("Bg").GetComponent<MenuScript>();
+
     }
 
 
@@ -53,10 +60,6 @@ public class Player_Cont : MonoBehaviour
             return;
         }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            isStart();
-        }
 
 
         if (yon == 1)
@@ -71,6 +74,13 @@ public class Player_Cont : MonoBehaviour
         float z = 0;
 
         transform.position = new Vector3( x , y, z);
+
+
+        if(BgScore == 3)
+        {
+            Referans_Kod1.BgRandomColor();
+            BgScore = 0;
+        }
 
     }
 
@@ -144,24 +154,20 @@ public class Player_Cont : MonoBehaviour
 
     public void isStart()
     {
-        speed = 2.5f;
-
+        speed = 3f;
+        OnPlayButton.enabled = false;
     }
 
     public void SkorUp()
     {
-
-
-        
+        BgScore++;
         WeScore++;
         textP.text = WeScore.ToString();
-
-
     }
 
     IEnumerator Wait()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.05f);
 
         RandomColor();  
 
@@ -182,8 +188,14 @@ public class Player_Cont : MonoBehaviour
                 break;
         }
 
-        Debug.Log(colorint);
+    //    Debug.Log(colorint);
     }
   
+    public void LevelUp()
+    {
+
+    }
+
+
 
 }
