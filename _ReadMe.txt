@@ -1,0 +1,1 @@
+Push 1: First : Karakter hareketi renk değiştirmesi/ Oyuncunun oynatacağı topların hareket etmesi kodları
