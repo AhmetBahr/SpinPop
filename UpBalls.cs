@@ -13,14 +13,6 @@ public class UpBalls : MonoBehaviour
     private int speed;
 
 
-
-
-    //  0 = mavi
-    //  1 = mor
-    [SerializeField]
-    private int color = 0;
-
-
     void Start()
     {
 
@@ -31,14 +23,14 @@ public class UpBalls : MonoBehaviour
     {
 
 
-
+/*
         if (Input.GetMouseButtonDown(0))
         {
        
             turnR();
             
             
-        }
+        }*/
 
     }
 
@@ -51,14 +43,14 @@ public class UpBalls : MonoBehaviour
         {
             case -1:
 
-                transform.DOMove(new Vector3(-0.7f, 2.5f, 0), 1);
+                transform.DOMove(new Vector3(-0.7f, 2.5f, 0), 1f);
 
                 yon *= -1;
 
 
                 break;
             case 1:
-                transform.DOMove(new Vector3(0.7f, 2.5f, 0), 1);
+                transform.DOMove(new Vector3(0.7f, 2.5f, 0), 1f);
 
                 yon *= -1;
 

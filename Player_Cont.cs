@@ -20,6 +20,8 @@ public class Player_Cont : MonoBehaviour
     [SerializeField]
     private float BgScore;
 
+    private float upSpeed = 0.1f;
+
     //  0 = mavi
     //  1 = mor
     [SerializeField]
@@ -32,12 +34,19 @@ public class Player_Cont : MonoBehaviour
 
     public int WeScore;
     public TextMeshProUGUI textP;
+
     public bool isDeat = false;
+    public bool isPlay;
 
     public float level = 1;
     public Button OnPlayButton;
 
+   
+
     MenuScript Referans_Kod1;
+    UpBalls Referans_Kod2;
+    DownBalls Referans_Kod3;
+
 
     public void Start()
     {
@@ -45,7 +54,11 @@ public class Player_Cont : MonoBehaviour
         yon = 1;
         WeScore = 0;
         colorint = 1;
+        speed = 3f;
+        isPlay = false; 
         Referans_Kod1 = GameObject.Find("Bg").GetComponent<MenuScript>();
+        Referans_Kod2 = GameObject.Find("Up").GetComponent<UpBalls>();
+        Referans_Kod3 = GameObject.Find("Down").GetComponent<DownBalls>();
 
     }
 
@@ -53,14 +66,12 @@ public class Player_Cont : MonoBehaviour
     private void Update()
     {
 
-        if (isDeat)
+        if (!isPlay)
         {
             Debug.Log("Öldü");
 
             return;
         }
-
-
 
         if (yon == 1)
             Counter += Time.deltaTime * speed;
@@ -95,7 +106,7 @@ public class Player_Cont : MonoBehaviour
 
                 yon *= -1;
                 SkorUp();
-
+                LevelUp();
                 StartCoroutine(Wait()); 
 
             }
@@ -117,7 +128,8 @@ public class Player_Cont : MonoBehaviour
 
                 yon *= -1;
                 SkorUp();
-               StartCoroutine( Wait()) ;
+                LevelUp();
+                StartCoroutine( Wait()) ;
             }
                 
             if (colorint == 0)                                        //YANLIS RENK
@@ -132,30 +144,37 @@ public class Player_Cont : MonoBehaviour
 
     public void deat()
     {
-      /*  isDeat = true;
-        if (PlayerPrefs.GetFloat("HighScore") < WeScore)
-        {
-            PlayerPrefs.SetFloat("HighScore", WeScore);
-        }
-        if (0 < Money)
-        {
-            PlayerPrefs.SetFloat("Money", PlayerPrefs.GetFloat("Money", Money) + Money);
-        }
-      */
+        /*  isDeat = true;
+          if (PlayerPrefs.GetFloat("HighScore") < WeScore)
+          {
+              PlayerPrefs.SetFloat("HighScore", WeScore);
+          }
+          if (0 < Money)
+          {
+              PlayerPrefs.SetFloat("Money", PlayerPrefs.GetFloat("Money", Money) + Money);
+          }
+        */
 
-            
-      //  dtmenu.ToogleMenu(WeScore);
 
-     //   AdMob.ShowInterstitial();
+        //  dtmenu.ToogleMenu(WeScore);
 
-        Destroy(gameObject);
+        //   AdMob.ShowInterstitial();
+
+        //Destroy(gameObject);
+        isPlay = false;
+        yon = 1;
+        WeScore = 0;
+        speed = 3f;
+        transform.position = new Vector3(0, 0, 0);
+        colorint = 1;
+       
 
     }
 
     public void isStart()
     {
-        speed = 3f;
-        OnPlayButton.enabled = false;
+        isPlay = true;
+       // OnPlayButton.enabled = false;
     }
 
     public void SkorUp()
@@ -194,8 +213,24 @@ public class Player_Cont : MonoBehaviour
     public void LevelUp()
     {
 
+        if (speed >= 5f)
+        {
+            speed = 5;
+        }
+        else 
+        {
+            speed += upSpeed;
+        }
+
     }
 
+
+    public void BallsMovie()
+    {
+        Referans_Kod2.turnR();
+        Referans_Kod3.turnR();  
+
+    }
 
 
 }

@@ -28,12 +28,12 @@ public class DownBalls : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+    /*    if (Input.GetMouseButtonDown(0))
         {
             turnR();
 
         }
-
+        */
     }
 
 
@@ -45,7 +45,7 @@ public class DownBalls : MonoBehaviour
         {
             case -1:
 
-                transform.DOMove(new Vector3(0.7f, -2.5f, 0), 1);
+                transform.DOMove(new Vector3(0.7f, -2.5f, 0), 1f);
 
                 yon *= -1;
 
@@ -53,7 +53,7 @@ public class DownBalls : MonoBehaviour
                 break;
 
             case 1:
-                transform.DOMove(new Vector3(-0.7f, -2.5f, 0), 1);
+                transform.DOMove(new Vector3(-0.7f, -2.5f, 0), 1f);
 
                 yon *= -1;
 
