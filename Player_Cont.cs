@@ -46,6 +46,7 @@ public class Player_Cont : MonoBehaviour
     MenuScript Referans_Kod1;
     UpBalls Referans_Kod2;
     DownBalls Referans_Kod3;
+    UIManager Referans_Kod4;
 
 
     public void Start()
@@ -59,6 +60,7 @@ public class Player_Cont : MonoBehaviour
         Referans_Kod1 = GameObject.Find("Bg").GetComponent<MenuScript>();
         Referans_Kod2 = GameObject.Find("Up").GetComponent<UpBalls>();
         Referans_Kod3 = GameObject.Find("Down").GetComponent<DownBalls>();
+        Referans_Kod4 = GameObject.Find("Manager").GetComponent<UIManager>();
 
     }
 
@@ -144,35 +146,24 @@ public class Player_Cont : MonoBehaviour
 
     public void deat()
     {
-        /*  isDeat = true;
-          if (PlayerPrefs.GetFloat("HighScore") < WeScore)
-          {
-              PlayerPrefs.SetFloat("HighScore", WeScore);
-          }
-          if (0 < Money)
-          {
-              PlayerPrefs.SetFloat("Money", PlayerPrefs.GetFloat("Money", Money) + Money);
-          }
-        */
-
-
-        //  dtmenu.ToogleMenu(WeScore);
-
-        //   AdMob.ShowInterstitial();
-
-        //Destroy(gameObject);
+        
         isPlay = false;
         yon = 1;
         WeScore = 0;
         speed = 3f;
-        transform.position = new Vector3(0, 0, 0);
+        transform.DOMove(new Vector3(0, 0, 0), 1f);
         colorint = 1;
-       
+
+
+        Referans_Kod4.stopGame();
+
+
 
     }
 
     public void isStart()
     {
+
         isPlay = true;
        // OnPlayButton.enabled = false;
     }
